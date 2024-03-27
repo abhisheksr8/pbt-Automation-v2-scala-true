@@ -1,0 +1,87 @@
+{
+  "fabric_id" : "1",
+  "components" : [ {
+    "PipelineComponent" : {
+      "path" : "dbfs:/FileStore/prophecy/artifacts/perftest/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/AutomationPBT_v2-truescala.jar",
+      "nodeName" : "AutomationPBT_v2-truescala",
+      "id" : "Fg4lJinKLjINFRfhXPVha",
+      "language" : "scala",
+      "pipelineId" : "pipelines/AutomationPBT_v2-truescala"
+    }
+  } ],
+  "request" : {
+    "format" : "MULTI_TASK",
+    "name" : "AutomationPBT_v2-truescala",
+    "job_clusters" : [ {
+      "job_cluster_key" : "AutomationPBT_v2-truescala_default_small",
+      "new_cluster" : {
+        "ssh_public_keys" : [ ],
+        "spark_version" : "13.3.x-scala2.12",
+        "node_type_id" : "i3.xlarge",
+        "num_workers" : 1,
+        "custom_tags" : { },
+        "init_scripts" : [ ],
+        "spark_conf" : {
+          "spark.prophecy.metadata.fabric.id" : "1",
+          "spark.prophecy.metadata.job.uri" : "__PROJECT_ID_PLACEHOLDER__/jobs/AutomationPBT_v2-truescala",
+          "spark.prophecy.metadata.is.interactive.run" : "false",
+          "spark.prophecy.project.id" : "__PROJECT_ID_PLACEHOLDER__",
+          "spark.prophecy.metadata.user.id" : "3",
+          "spark.prophecy.tasks" : "{\"AutomationPBT_v2-truescala\":\"pipelines/AutomationPBT_v2-truescala\"}",
+          "spark.prophecy.metadata.job.branch" : "__PROJECT_RELEASE_VERSION_PLACEHOLDER__",
+          "spark.prophecy.metadata.url" : "__PROPHECY_URL_PLACEHOLDER__",
+          "spark.prophecy.execution.metrics.disabled" : "true",
+          "spark.prophecy.execution.service.url" : "wss://perftest.prophecy.io/execution/eventws",
+          "spark.databricks.isv.product" : "prophecy"
+        },
+        "spark_env_vars" : {
+          "PYSPARK_PYTHON" : "/databricks/python3/bin/python3"
+        },
+        "runtime_engine" : "STANDARD",
+        "aws_attributes" : {
+          "first_on_demand" : 1,
+          "availability" : "SPOT_WITH_FALLBACK",
+          "zone_id" : "auto",
+          "spot_bid_price_percent" : 100
+        },
+        "data_security_mode" : "SINGLE_USER"
+      }
+    } ],
+    "email_notifications" : {
+      "on_start" : [ "abhisheks+e2etests@prophecy.io" ],
+      "on_failure" : [ "abhisheks+e2etests@prophecy.io" ]
+    },
+    "tasks" : [ {
+      "task_key" : "AutomationPBT_v2-truescala",
+      "job_cluster_key" : "AutomationPBT_v2-truescala_default_small",
+      "spark_jar_task" : {
+        "main_class_name" : "io.prophecy.pipelines.automationpbt_v2truescala.Main",
+        "parameters" : [ "-i", "default", "-O", "{}" ]
+      },
+      "libraries" : [ {
+        "maven" : {
+          "coordinates" : "io.prophecy:prophecy-libs_2.12:3.4.0-7.1.82"
+        }
+      }, {
+        "pypi" : {
+          "package" : "prophecy-libs==1.8.13"
+        }
+      }, {
+        "jar" : "dbfs:/FileStore/prophecy/artifacts/perftest/cp/__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__/pipeline/AutomationPBT_v2-truescala.jar"
+      } ],
+      "email_notifications" : { },
+      "max_retries" : 0
+    } ],
+    "max_concurrent_runs" : 1,
+    "schedule" : {
+      "quartz_cron_expression" : "0 0 0 1/1 * ? 2090",
+      "timezone_id" : "UTC",
+      "pause_status" : "UNPAUSED"
+    }
+  },
+  "cluster_mode" : {
+    "clusterMode" : "Single"
+  },
+  "secret_scope" : "prophecy_jobs_3",
+  "sorted_processes" : [ "Fg4lJinKLjINFRfhXPVha" ]
+}
